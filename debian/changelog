@@ -1,3 +1,12 @@
+vera-plugin-tint2 (0.21-1) devel; urgency=medium
+
+  * Check for the existance of the configuration file,
+    and use a fallback if it doesn't exist.
+  * debian/vera-plugin-tint2.install: install the tint2
+    configuration file.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Mon, 21 Jul 2014 16:25:48 +0200
+
 vera-plugin-tint2 (0.20-1) devel; urgency=medium
 
   * Initial release.
