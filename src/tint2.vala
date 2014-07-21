@@ -107,10 +107,16 @@ namespace Tint2Plugin {
 					warning("Unable to set-up the secondary_config: %s", e.message); 
 				}
 				
+				/* Check for the configuration_file */
+				string configuration_file = this.settings.get_string("configuration-file");
+				if (!FileUtils.test(configuration_file, FileTest.EXISTS))
+					/* It doesn't exist, use the default configuration file */
+					configuration_file = "/etc/xdg/tint2/tint2rc";
+				
 				try {
 					Process.spawn_async(
 						this.HOME,
-						{ "tint2", "-c", this.settings.get_string("configuration-file") },
+						{ "tint2", "-c", configuration_file },
 						Environ.get(),
 						SpawnFlags.SEARCH_PATH | SpawnFlags.DO_NOT_REAP_CHILD,
 						null,
