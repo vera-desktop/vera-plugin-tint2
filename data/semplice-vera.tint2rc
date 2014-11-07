@@ -8,7 +8,7 @@
 # ID 1
 rounded = 0
 border_width = 0
-background_color = #383838 58
+background_color = #000000 60
 border_color = #FFFFFF 100
 
 # ID 2
@@ -44,7 +44,7 @@ border_color = #FFFFFF 9
 # Panel
 panel_monitor = all
 panel_position = bottom center horizontal
-panel_size = 0 30
+panel_size = 0 32
 panel_margin = 0 0
 panel_padding = 5 3 10
 panel_dock = 0
@@ -102,8 +102,8 @@ font_shadow = 0
 systray = 1
 systray_padding = 5 1 5
 systray_sort = right2left
-systray_background_id = 3
-systray_icon_size = 20
+systray_background_id = 2
+systray_icon_size = 24
 systray_icon_asb = 100 0 0
 
 # Clock
@@ -114,7 +114,7 @@ clock_tooltip = %A %d %B %Y
 clock_padding = 0 0
 clock_background_id = 0
 clock_lclick_command = gsimplecal
-clock_rclick_command = time-admin
+clock_rclick_command = gsimplecal
 
 # Tooltips
 tooltip = 1
