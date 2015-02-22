@@ -1,3 +1,9 @@
+vera-plugin-tint2 (0.24-1) unstable; urgency=medium
+
+  * Delay tint2 startup if the system is in Live mode.
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Sun, 22 Feb 2015 12:32:58 +0100
+
 vera-plugin-tint2 (0.23-1) devel; urgency=medium
 
   * tint2rc: style changes
