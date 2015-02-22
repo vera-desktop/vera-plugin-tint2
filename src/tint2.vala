@@ -29,92 +29,7 @@ namespace Tint2Plugin {
 
 		public XlibDisplay display;
 		public Settings settings;
-		
-		private string? get_window_name(X.Window window) {
-			/**
-			 * Returns the window name given an X.Window by looking
-			 * at its WM_NAME property.
-			*/
 			
-			X.Atom type;
-			int form;
-			ulong length, remain;
-			void* result;
-						
-			if (display.display.get_window_property(
-				window,
-				display.display.intern_atom("WM_NAME", false),
-				0,
-				1024,
-				false,
-				X.XA_STRING,
-				out type,
-				out form,
-				out length,
-				out remain,
-				out result
-			) == 1) {
-				/* Fail, skipping */
-				return null;
-			}
-						
-			return (string)result;
-		}
-					
-		private void stick() {
-			/**
-			 * Sometimes the panel will not stick on every desktop because
-			 * the WM may be fully initialized after the panel startup.
-			 * This method ensures that the panel will be sticky on every
-			 * desktop regardless of the state it was before.
-			*/
-			
-			int64[] struts = { 0xFFFFFFFF };
-			
-			X.Atom type;
-			int form;
-			ulong length, remain;
-			void* list_data;
-			
-			/* Get window list */			
-			if (display.display.get_window_property(
-				display.xrootwindow,
-				display.display.intern_atom("_NET_CLIENT_LIST", false),
-				0,
-				1024,
-				false,
-				X.XA_WINDOW,
-				out type,
-				out form,
-				out length,
-				out remain,
-				out list_data
-			) == 1) {
-				/* Fail, skipping */
-				return;
-			}
-			
-			unowned X.Window[] list = (X.Window[])list_data;
-			
-			for (int i=0; i < length; i++) {
-				/* Search for tint2 */
-				if (this.get_window_name(list[i]) == "tint2") {
-					/* Change desktop property */
-					display.display.change_property(
-						list[i],
-						display.display.intern_atom("_NET_WM_DESKTOP", false),
-						X.XA_CARDINAL,
-						32,
-						X.PropMode.Replace,
-						(uchar[])struts,
-						1
-					);
-				}
-			}
-			
-		}
-				
-		
 		private void on_process_terminated(Pid pid, int status) {
 			/**
 			 * Fired when the process pid has been terminated.
@@ -150,8 +65,23 @@ namespace Tint2Plugin {
 			 * Called by vera when doing the startup.
 			 */
 			
-			if (phase == StartupPhase.PANEL) {
+			if (phase == StartupPhase.PANEL || phase == StartupPhase.SESSION) {
 				/* Launch tint2. */
+				
+				/* Delay startup if we are on live */
+				if (FileUtils.test("/etc/semplice-live-mode", FileTest.EXISTS) && phase == StartupPhase.PANEL) {
+					Timeout.add_seconds(
+						3,
+						() => {
+							this.startup(StartupPhase.SESSION);
+							
+							return false;
+						}
+					);
+					
+					return;
+				}
+				
 				Pid pid;
 				
 				try {
@@ -213,15 +143,6 @@ namespace Tint2Plugin {
 					warning(e.message);
 				}
 				
-				/* A 3 second wait should be enough */
-				Timeout.add_seconds(
-					3,
-					() => {
-						this.stick();
-						
-						return false;
-					}
-				);
 			}
 			
 		}
