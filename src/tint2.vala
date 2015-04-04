@@ -71,7 +71,7 @@ namespace Tint2Plugin {
 				/* Delay startup if we are on live */
 				if (FileUtils.test("/etc/semplice-live-mode", FileTest.EXISTS) && phase == StartupPhase.PANEL) {
 					Timeout.add_seconds(
-						3,
+						5,
 						() => {
 							this.startup(StartupPhase.SESSION);
 							
