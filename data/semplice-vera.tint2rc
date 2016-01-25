@@ -51,6 +51,7 @@ panel_dock = 0
 wm_menu = 1
 panel_layer = top
 panel_background_id = 1
+mouse_effects = 1
 
 # Launchers
 # By default launchers are disabled, use /usr/bin/tint2-panel-config to enable them
