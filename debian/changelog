@@ -1,3 +1,10 @@
+vera-plugin-tint2 (1.0.1-1) unstable; urgency=medium
+
+  * [tint2rc] panel: enable mouse effects
+  * [packaging] Depend on tint2 >= 0.12.5
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Mon, 25 Jan 2016 13:08:09 +0100
+
 vera-plugin-tint2 (1.0.0-1) unstable; urgency=medium
 
   * Increase panel load delay to 5 seconds when on live.
