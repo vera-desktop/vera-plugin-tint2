@@ -1,3 +1,10 @@
+vera-plugin-tint2 (1.0.1-2) unstable; urgency=medium
+
+  * [packaging] Remove libgee build-dependency
+  * [packaging] Build-depend on valac instead of valac-0.26
+
+ -- Eugenio Paolantonio (g7) <me@medesimo.eu>  Mon, 25 Jan 2016 13:21:34 +0100
+
 vera-plugin-tint2 (1.0.1-1) unstable; urgency=medium
 
   * [tint2rc] panel: enable mouse effects
