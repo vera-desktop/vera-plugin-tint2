@@ -59,6 +59,7 @@ launcher_tooltip = 1
 launcher_padding = 2 0 2
 launcher_background_id = 0
 launcher_icon_size = 32
+launcher_terminal_command = x-terminal-emulator -e %s
 
 # Panel Autohide
 autohide = 0
